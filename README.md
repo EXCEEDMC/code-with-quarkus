@@ -39,4 +39,22 @@ table (표) 사용 방법을 배웠다.
 css 경로를 연동시켜서 스타일을 꾸미는 방법을 배웠다. -->
 <link rel="stylesheet" href="../css/download.css">
 
+## 6주차 수업내용
+
+<!-- 자바 스크립트의 기초 및 작동 원리, 활용 범위 및 필요성
+<script> 태그에 js 파일을 내부 로컬로 연동하는 방법
+js의 구현 방식 여러가지
+<form> 태그와 <button> 태그, js 파일 연동을 통해 검색창 구현하기 (이때 search.js 는 최하단에 입력) -->
+
+<form class="d-flex" id="searchForm">
+  input class="form-control me-2" type="search" placeholder="챔피언, 뉴스 검색..." aria-label="Search" id="searchInput">
+  <button class="btn btn-outline-success" type="submit">검색하기</button>
+</form>
+
+<script src="js/search.js"></script>
+
+
+
+
+
 
