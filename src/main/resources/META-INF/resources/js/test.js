@@ -31,8 +31,8 @@ console.log("===== 3. 호이스팅 =====");
 console.log(testVar); // undefined
 var testVar = 100;
 
-console.log(testLet); // ReferenceError
-let testLet = 200;
+// console.log(testLet); // ReferenceError
+// let testLet = 200;
 
-console.log(testConst); // ReferenceError
-const testConst = 300;
+// console.log(testConst); // ReferenceError
+// const testConst = 300;

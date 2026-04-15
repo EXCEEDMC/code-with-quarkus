@@ -53,7 +53,16 @@ js의 구현 방식 여러가지
 
 <script src="js/search.js"></script>
 
+## 7주차 수업내용
 
+<!-- main.css 파일에 기존 인덱스 사용자 스타일을 따로 분리하여 관리, + css 연동
+서치 자바 스크립트 + 검색 결과 섹션을 인덱스 최하단에 추가함으로서 웹사이트 내부 검색 기능을 구현하였다. 
+searchForm
+performSearch (함수)
+filter (검색어 일치 조건)
+searchKeywordDisplay (키워드 출력)
+필터 결과가 0 인경우 화면 출력 (if else문 사용)
+switchCategory (버튼 클릭 시 탭 전환) -->
 
 
 
