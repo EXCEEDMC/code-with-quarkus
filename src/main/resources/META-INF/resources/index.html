@@ -5,7 +5,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/test.js"></script>
-    
+    <script src="js/test2.js"></script>
+    <script src="js/toggle.js"></script>
+
     <script>
         window.onload = function() {
         alert("메인 페이지 로딩 완료");
@@ -53,9 +55,12 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
 <div class="container-fluid">
   <a class="navbar-brand" href="#">리그 오브 레전드</a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<img src="/images/LOL.webp" alt="" width="30" height="24">
+<!-- [변경] "Navbar" 텍스트 → 다크/라이트 토글 버튼 -->
+<button class="btn border-0" id="themeToggleBtn" onclick="toggleTheme()">
+DARK
+</button>
+
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item">
