@@ -74,3 +74,41 @@ switchCategory (버튼 클릭 시 탭 전환) -->
 mysql 설치 후 데이터베이스 연동 -->
 
 
+## 10주차 수업내용
+
+<!-- 최근 웹 보안 사고 사례들 되짚어보기
+데이터베이스, DataSeeder 연동
+로그인, 로그아웃 화면 구현
+
+
+      </li>
+           <li class="nav-item">
+        <a class="nav-link" href="/login">로그인</a>
+      </li>
+
+              링크 + 로그인버튼 -> 로그인 화면창으로 이동
+
+
+        <div class="container" style="max-width: 400px;">
+            <h2 class="fw-bold mb-4">로그인</h2>
+
+            <form method="POST" action="/login_check">
+                <div class="mb-3 text-start">
+                    <label class="form-label">아이디</label>
+                    <input type="text" class="form-control"
+                            name="username" placeholder="아이디 입력" required>
+                </div>
+                <div class="mb-3 text-start">
+                    <label class="form-label">패스워드</label>
+                    <input type="password" class="form-control"
+                            name="password" placeholder="패스워드 입력" required>
+                </div>
+                <button type="submit"
+                            class="btn btn-primary w-100">로그인</button>
+
+              아이디, 패스워드 화면, 제출 버튼
+
+로그인 후 화면 이후 메인 페이지로 복귀 -> 기존 인덱스 파일을 재활용 해야함. 경로들은 ../ 을 앞에 붙여 수정 -->
+
+
+
