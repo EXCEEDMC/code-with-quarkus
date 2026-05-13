@@ -45,7 +45,6 @@ public class DataSeeder {
         persist("블리츠크랭크", "탱커", "서폿");
         persist("노틸러스", "탱커", "서폿");
         persist("세주아니", "탱커", "정글/서폿");
-
     }
 
     }
@@ -58,3 +57,4 @@ public class DataSeeder {
         c.persist();
     }
 }
+
