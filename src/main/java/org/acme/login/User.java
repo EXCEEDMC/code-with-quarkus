@@ -31,6 +31,7 @@ import jakarta.persistence.Column;
     @Column(unique = true) // 이메일 중복 방지
     public String email;
     public String phone; // 연락처
+    public String profileImage; // 저장된 파일명 (UUID 기반)
     // 아이디로 조회
     public static User findByUsername(String username) {
         return find("username", username).firstResult();

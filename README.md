@@ -211,3 +211,98 @@ password Hidden 해시값 저장 후 서버 전송
 로그인 상태 유지를 위해 필요.
 
 경로 / (루트) 를 사용하여 로그인 상태일땐 after_login.html을 반환하고, 비로그인 상태일땐 main_index.html을 반환한다.
+
+
+## 13주차 수업내용 - 프로필 사진, toast 알림
+
+GEMINI-3.5-FLASH 모델을 활용하여 함수들의 역할을 이해하기 쉽게 요약했습니다.
+
+1. 프론트엔드 (JavaScript: Profile.js)
+역할: 페이지가 로드되면 서버에서 유저 정보를 가져와 화면에 표시
+
+window.onload
+역할: 웹 페이지(HTML)의 로딩이 완료되는 시점에 자동으로 실행되는 이벤트 함수
+
+fetch('/profile/info')
+역할: 서버의 엔드포인트(/profile/info)로 비동기 요청(HTTP GET)을 보내 유저 데이터를 요청
+
+.then(res => res.json())
+역할: 서버로부터 받은 raw 응답 데이터를 자바 스크립트가 읽을 수 있는 JSON 객체로 변환
+
+document.getElementById('ID').textContent = 데이터
+역할: HTML 요소의 텍스트를 안전하게 변경 (innerHTML 대신 사용하여 악성 스크립트 실행 등 DOM 조작 공격을 방지)
+
+document.getElementById('profileImg').src = 경로
+역할: 프로필 이미지 태그(<img src="...">)의 이미지 경로를 동적으로 변경하여 화면에 사진을 띄움
+
+
+2. 백엔드 - 프로필 정보 조회 (GET /profile/info)
+역할: 로그인된 세션을 확인하고, DB에서 유저 정보를 조회하여 JSON 형식으로 응답
+
+context.session().get("loginUser")
+역할: 현재 접속한 브라우저의 세션 영역에서 로그인한 유저의 식별 정보(아이디 등)를 가져옴
+
+Response.status(401).build()
+역할: 세션에 유저 정보가 없을 경우, 로그인하지 않은 사용자로 판단하여 401 Unauthorized(권한 없음) 에러를 반환
+
+User.findByUsername(loginUser)
+역할: 데이터베이스(DB)를 조회하여 로그인한 유저의 상세 정보(이메일, 전화번호, 프로필 이미지명 등)를 가져옴
+
+Response.ok(Map.of(...)).build()
+역할: DB에서 조회한 정보를 Key-Value 쌍(Map)으로 묶어, 성공(200 OK) 상태코드와 함께 JSON 포맷으로 응답
+
+
+3. 백엔드 - 프로필 이미지 업로드 (POST /profile/upload)
+역할: 사용자가 업로드한 이미지 파일의 유효성을 검사한 뒤, 서버 디렉토리에 고유한 이름으로 저장하고 DB를 업데이트
+
+ext.matches("jpg|jpeg|png|gif|webp")
+역할 (확장자 검사): 업로드된 파일의 확장자가 허용된 이미지 포맷인지 정규표현식으로 검증,허용되지 않으면 에러 페이지로 돌아감
+
+file.size() > 5 * 1024 * 1024
+역할 (크기 검사): 업로드된 파일이 제한 용량(5MB)을 초과하는지 체크
+
+UUID.randomUUID()
+역할 (중복 방지): 중복될 확률이 거의 없는 무작위의 고유 식별값(UUID)을 생성하여, 서로 다른 유저가 같은 이름의 사진을 올려도 파일명이 덮어씌워지지 않도록 방지
+
+Files.createDirectories(uploadDir)
+역할: 서버 내에 이미지를 저장할 폴더(경로)가 없을 경우 자동으로 생성
+
+Files.copy(file.uploadedFile(), ...)
+역할 (파일 저장): 임시 경로에 업로드된 파일을 실제 서비스가 사용하는 서버의 지정된 디렉토리로 복사(저장)
+
+Response.seeOther(URI.create("/profile"))
+역할 (화면 이동): 파일 업로드 처리가 끝난 후, 원래의 프로필 페이지(/profile)로 화면을 리다이렉트(새로고침)시킴
+
+[TOAST 알림창]
+
+일정 시간 뒤 자동으로 사라지는 현대적인 비방해형(Non-blocking) 알림 창 구현
+
+
+1. 자바스크립트 함수 (test.js)
+
+showToast(message, type)
+메시지와 알림 종류('success', 'danger', 'warning')를 매개변수로 받아 토스트 창을 동적으로 생성하는 메인 함수
+
+document.getElementById('liveToast') / ('toastBody')
+화면에 그려진 토스트 틀(틀의 ID)과 메시지가 들어갈 본문 영역을 DOM 객체로 가져옴
+
+toastEl.className = ...
+알림 종류(성공-초록, 실패-빨강, 경고-노랑)에 맞춰 배경색(bg-${type})과 스타일 클래스를 동적으로 변경
+
+toastBody.textContent = message
+토스트 본문 영역에 사용자가 요청한 메시지 텍스트를 대입
+
+new bootstrap.Toast(toastEl, { delay: 3000 })
+부트스트랩5 라이브러리를 통해 3초(3000ms) 후에 자동으로 사라지도록 설정된 토스트 객체를 생성
+
+toast.show()
+생성된 토스트 객체를 제어하여 화면에 실제로 노출
+
+
+2. 화면 구성 요소 (HTML)
+
+class="toast-container position-fixed bottom-0 end-0 p-3"
+토스트 창들을 화면 오른쪽 아래(우하단)에 겹치지 않게 고정하여 정렬하는 역할
+
+data-bs-dismiss="toast"
+닫기 버튼(X)을 클릭했을 때 자바스크립트 코딩 없이 부트스트랩 자체 기능으로 토스트 창을 즉시 닫아주는 역할
